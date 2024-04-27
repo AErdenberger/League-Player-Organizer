@@ -79,16 +79,60 @@ public class PlayerFileRepository implements PlayerRepository{
 
     @Override
     public Player add(Player player) throws DataAccessException {
-        return null;
+        List<Player> all = findAll();
+
+        int nextId = 0;
+        for(Player p: all){
+            nextId = Math.max(nextId, p.getId());
+        }
+
+        nextId++;
+        player.setId(nextId);
+
+        all.add(player);
+
+        writeAll(all);
+
+        return player;
     }
 
     @Override
     public boolean update(Player player) throws DataAccessException {
+        List<Player> all = findAll();
+        for(int i = 0; i < all.size(); i++){
+            if(all.get(i).getId() == player.getId()){
+                all.set(i, player);
+                writeAll(all);
+                return true;
+            }
+        }
+
         return false;
     }
 
     @Override
     public boolean deleteById(int playerId) throws DataAccessException {
         return false;
+    }
+
+    private void writeAll(List<Player> players) throws DataAccessException {
+        try(PrintWriter writer = new PrintWriter(filePath)){
+            writer.println("id,name,ingame,rank,primary,secondary");
+            for(Player p : players){
+                writer.println(serialize(p));
+            }
+        } catch (IOException ex){
+            throw new DataAccessException(ex.getMessage(), ex);
+        }
+    }
+
+    private String serialize(Player player){
+        return String.format("%s,%s,%s,%s,%s,%s",
+                player.getId(),
+                player.getName(),
+                player.getIngame(),
+                player.getRank(),
+                player.getPrimary(),
+                player.getSecondary());
     }
 }
