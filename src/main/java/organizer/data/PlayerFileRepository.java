@@ -46,17 +46,35 @@ public class PlayerFileRepository implements PlayerRepository{
 
     @Override
     public Player findById(int playerId) throws DataAccessException {
+        for(Player player : findAll()){
+            if(player.getId() == playerId){
+                return player;
+            }
+        }
+
         return null;
     }
 
     @Override
     public List<Player> findByRole(Role role) throws DataAccessException {
-        return null;
+        ArrayList<Player> result = new ArrayList<>();
+        for(Player player : findAll()){
+            if(player.getPrimary() == role || player.getSecondary() == role) {
+                result.add(player);
+            }
+        }
+        return result;
     }
 
     @Override
     public List<Player> findByRank(Rank rank) throws DataAccessException {
-        return null;
+        ArrayList<Player> result = new ArrayList<>();
+        for(Player player : findAll()){
+            if(player.getRank() == rank) {
+                result.add(player);
+            }
+        }
+        return result;
     }
 
     @Override
