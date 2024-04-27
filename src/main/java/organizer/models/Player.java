@@ -1,13 +1,15 @@
 package organizer.models;
 
 public class Player{
+    private int id;
     private String name;
     private String ingame;
     private Rank Rank;
     private Role Primary;
     private Role Secondary;
 
-    public Player(String name, String ingame, Rank rank, Role primary, Role secondary) {
+    public Player(int id, String name, String ingame, Rank rank, Role primary, Role secondary) {
+        this.id = id;
         this.name = name;
         this.ingame = ingame;
         Rank = rank;
@@ -18,6 +20,8 @@ public class Player{
     public Player(){
 
     }
+
+    public int getId() { return id; }
 
     public String getName() {
         return name;
@@ -37,6 +41,30 @@ public class Player{
 
     public Role getSecondary() {
         return Secondary;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setIngame(String ingame) {
+        this.ingame = ingame;
+    }
+
+    public void setRank(organizer.models.Rank rank) {
+        Rank = rank;
+    }
+
+    public void setPrimary(Role primary) {
+        Primary = primary;
+    }
+
+    public void setSecondary(Role secondary) {
+        Secondary = secondary;
     }
 
     @Override
