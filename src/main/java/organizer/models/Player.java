@@ -39,6 +39,7 @@ public class Player{
         return Secondary;
     }
 
+    @Override
     public java.lang.String toString() {
         final java.lang.StringBuilder sb = new java.lang.StringBuilder("Player{");
         sb.append("name='").append(name).append('\'');

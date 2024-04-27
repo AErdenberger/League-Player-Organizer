@@ -13,7 +13,7 @@ public enum Rank {
     GRANDMASTER("Grandmaster"),
     CHALLENGER("Challenger");
 
-    private String displayRank;
+    private final String displayRank;
 
     Rank(String displayRank){
         this.displayRank = displayRank;

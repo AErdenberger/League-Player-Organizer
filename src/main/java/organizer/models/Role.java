@@ -7,7 +7,7 @@ public enum Role{
     BOT("Bot"),
     SUPPORT("Support");
 
-    private String displayRole;
+    private final String displayRole;
 
     Role(String displayRole) {
         this.displayRole = displayRole;
